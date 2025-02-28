@@ -1,0 +1,281 @@
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+  Updated for consistency and completeness
+*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0; /* Added to reset padding globally */
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  font-family: Arial, sans-serif; /* Consolidated from later rule */
+  background-color: #f2f2f2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty; /* Consider fallback: word-wrap: break-word; */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance; /* Consider fallback: word-wrap: break-word; */
+}
+
+li {
+  list-style: none; /* Global reset, no need to repeat in .header nav ul */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}
+
+/* Style Start */
+.header {
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header nav ul {
+  display: flex;
+  gap: 10px; /* Replaced margin-right with gap for cleaner spacing */
+}
+
+.header nav ul li a {
+  color: #fff;
+}
+
+.header form {
+  display: flex;
+  align-items: center;
+}
+
+.header form input[type='search'] {
+  margin-right: 10px;
+  padding: 5px;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  background-color: #333;
+  color: #fff;
+}
+
+.header form button[type='submit'] {
+  padding: 5px 10px;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+.header form button[type='submit']:hover,
+.header form button[type='submit']:focus {
+  /* Added focus for accessibility */
+  background-color: #fff;
+  color: #333;
+}
+
+/* Existing reset and other styles remain unchanged up to this point */
+
+/* Improved home-container and contents */
+.home-container {
+  flex-grow: 1;
+  padding: 40px 20px;
+  background-color: #333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  max-width: 1200px; /* Increased from 900px for wider screens */
+  width: 90%; /* Allows it to scale fluidly up to the max-width */
+  margin: 20px auto;
+}
+
+.home-container h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.home-link-container {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(300px, 1fr)
+  ); /* Kept at 300px min */
+  gap: 25px; /* Slightly increased for better spacing */
+  padding: 0;
+}
+
+.home-link-card {
+  height: 12em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f8f8;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.home-link-card:hover,
+.home-link-card:focus {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  background-color: #f8f8f8;
+}
+
+.home-link-container a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Responsive adjustments */
+@media (max-width: 700px) {
+  .home-container {
+    padding: 20px 15px;
+    margin: 10px auto;
+    width: 95%; /* Slightly wider on small screens */
+  }
+
+  .home-link-container {
+    grid-template-columns: 1fr; /* Single column on smaller screens */
+    gap: 15px;
+  }
+
+  .home-link-card {
+    height: 10em;
+    font-size: 1.1rem;
+  }
+}
+
+/* Ensure it scales nicely on very large screens */
+@media (min-width: 1400px) {
+  .home-container {
+    max-width: 1300px; /* Optional: allows even more width on ultra-wide screens */
+  }
+}
+
+/* Rest of your CSS (e.g., .container, table, footer) remains unchanged */
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #333;
+  color: #fff;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+}
+
+footer p {
+  margin: 0;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
