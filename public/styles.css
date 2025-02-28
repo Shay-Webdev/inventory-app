@@ -279,3 +279,163 @@ label {
   display: block;
   margin-bottom: 5px;
 }
+/* games */
+
+.games-container {
+  max-width: 1200px; /* Matches home-container for consistency */
+  width: 90%; /* Fluid width up to max-width */
+  margin: 20px auto; /* Consistent with home-container */
+  padding: 40px 20px; /* Increased padding for breathing room */
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Matches home-container */
+  border-radius: 8px; /* Added for consistency */
+}
+
+.games-container h1 {
+  text-align: center;
+  font-size: 2rem; /* Larger for prominence */
+  color: #333; /* Consistent with home-container */
+  margin-bottom: 30px; /* More space before cards */
+}
+
+.games-list {
+  display: grid; /* Switched from flex to grid for better control */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive */
+  gap: 20px; /* Consistent spacing */
+}
+
+.game-card {
+  padding: 15px; /* Slightly more padding */
+  border: 1px solid #ddd;
+  border-radius: 6px; /* Slightly larger radius */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Matches home-link-card */
+  background-color: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Hover effect */
+}
+
+.game-card:hover,
+.game-card:focus {
+  /* Added focus for accessibility */
+  transform: translateY(-5px); /* Lift effect */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+}
+
+.game-card img {
+  width: 100%;
+  height: 200px; /* Fixed height for consistency */
+  object-fit: cover; /* Ensures images crop nicely */
+  margin-bottom: 15px; /* More spacing */
+  border-radius: 4px; /* Subtle rounding */
+}
+
+.game-card h2 {
+  font-size: 1.25rem; /* Matches home-link-card */
+  font-weight: 500; /* Medium weight */
+  margin-bottom: 10px; /* More spacing */
+  color: #333;
+}
+
+.game-card p {
+  font-size: 0.9rem; /* Slightly larger for readability */
+  margin-bottom: 10px; /* Consistent spacing */
+  color: #666; /* Softer color for secondary text */
+}
+
+.game-card p:last-child {
+  margin-bottom: 0; /* Retained to avoid extra space */
+}
+
+/* Responsive adjustments */
+@media (max-width: 700px) {
+  .games-container {
+    padding: 20px 15px;
+    width: 95%; /* Wider on small screens */
+    margin: 10px auto;
+  }
+
+  .games-list {
+    grid-template-columns: 1fr; /* Single column on small screens */
+    gap: 15px;
+  }
+
+  .game-card img {
+    height: 180px; /* Slightly smaller on mobile */
+  }
+}
+
+/* categories */
+
+.categories-container {
+  max-width: 1200px; /* Matches home-container for consistency */
+  width: 90%; /* Fluid width up to max-width */
+  margin: 20px auto; /* Consistent with home-container */
+  padding: 40px 20px; /* Increased padding for breathing room */
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Matches home-container */
+  border-radius: 8px; /* Added for consistency */
+}
+
+.categories-container h1 {
+  text-align: center;
+  font-size: 2rem; /* Larger for prominence */
+  color: #333; /* Consistent with home-container */
+  margin-bottom: 30px; /* More space before cards */
+}
+.categories-container h2 {
+  text-align: center;
+  font-size: 1.5rem; /* Larger for prominence */
+  color: #333; /* Consistent with home-container */
+  margin-bottom: 30px; /* More space before cards */
+}
+
+.categories-list {
+  display: grid; /* Switched from flex to grid for better control */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive */
+  gap: 20px; /* Consistent spacing */
+}
+
+.category-card {
+  padding: 15px; /* Slightly more padding */
+  border: 1px solid #ddd;
+  border-radius: 6px; /* Slightly larger radius */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Matches home-link-card */
+  background-color: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Hover effect */
+}
+
+.category-card:hover,
+.category-card:focus {
+  /* Added focus for accessibility */
+  transform: translateY(-5px); /* Lift effect */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+}
+
+.category-card h2 {
+  font-size: 1.25rem; /* Matches home-link-card */
+  font-weight: 500; /* Medium weight */
+  margin-bottom: 10px; /* More spacing */
+  color: #333;
+}
+.category-card p {
+  font-size: 0.9rem; /* Slightly larger for readability */
+  margin-bottom: 10px; /* Consistent spacing */
+  color: #666; /* Softer color for secondary text */
+}
+
+.category-card p:last-child {
+  margin-bottom: 0; /* Retained to avoid extra space */
+}
+
+/* Responsive adjustments */
+@media (max-width: 700px) {
+  .categories-container {
+    padding: 20px 15px;
+    width: 95%; /* Wider on small screens */
+    margin: 10px auto;
+  }
+
+  .categories-list {
+    grid-template-columns: 1fr; /* Single column on small screens */
+    gap: 15px;
+  }
+}

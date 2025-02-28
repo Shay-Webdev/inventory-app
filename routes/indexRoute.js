@@ -1,7 +1,9 @@
 const { Router } = require('express');
 const indexRouter = Router();
-const indexController = require('../controllers/indexController');
+const controller = require('../controllers/indexController');
 
-indexRouter.get('/', indexController.indexController);
+indexRouter.get('/', controller.indexController);
+indexRouter.get('/games', controller.gamesController);
+indexRouter.get('/categories', controller.categoriesController);
 
 module.exports = indexRouter;
