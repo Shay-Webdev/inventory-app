@@ -522,3 +522,100 @@ label {
     font-size: 1.2rem;
   }
 }
+
+/* Edit Page */
+
+.game-edit-container {
+  max-width: 1200px;
+  width: 90%;
+  margin: 20px auto;
+  padding: 40px 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+.game-edit-container h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.game-edit-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-edit-container label {
+  text-align: left;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.game-edit-container input[type='text'] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #333;
+}
+.game-edit-container input[type='submit'] {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.game-edit-container input[type='submit']:hover {
+  background-color: #555;
+}
+
+/* Responsive Edit Page */
+@media (max-width: 700px) {
+  .game-edit-container h1 {
+    font-size: 1.5rem;
+  }
+  .game-edit-container label {
+    font-size: 1rem;
+  }
+  .game-edit-container input[type='text'] {
+    font-size: 0.9rem;
+  }
+  .game-edit-container input[type='submit'] {
+    font-size: 1rem;
+  }
+}
+
+/* Responsive Header */
+@media (max-width: 700px) {
+  .header {
+    padding: 10px;
+  }
+  .header h1 {
+    font-size: 1.5rem;
+  }
+  .header-nav {
+    display: none;
+  }
+  .header-nav form {
+    display: none;
+  }
+}
+
+/* Responsive Footer */
+@media (max-width: 700px) {
+  footer {
+    padding: 5px;
+  }
+  footer p {
+    font-size: 0.8rem;
+  }
+}

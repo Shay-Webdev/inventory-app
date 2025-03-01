@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/styles.css" />
-    <title><%= title %></title>
+    <title><%= game.game_name %></title>
   </head>
   <body>
     <%- include('header') %>
@@ -14,9 +14,10 @@
           <img src="<%= game.image_url %>" alt="<%= game.game_name %>" />
           <h2><%= game.game_name %></h2>
           <p>Publisher: <%= game.publisher %></p>
-          <p>Release Date: <%= game.release_date %></p>
+          <p>Release Date: <%= game.year_of_release %></p>
           <p>Cost: $<%= game.cost %></p>
-          <p>Genre: <%= game.genre %></p>
+          <p>Genre: <%= game.genres %></p>
+          <a href="/games/<%= game.id %>/edit">Edit</a>
         </div>
       </div>
     </section>

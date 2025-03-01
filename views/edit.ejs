@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <%- include('header') %>
+    <section class="game-edit-container">
+      <h1><%= title %></h1>
+      <form
+        action="/games/<%= game.id %>/update"
+        method="POST"
+        class="game-edit-form"
+      >
+        <label for="gameName">Game Name:</label>
+        <input
+          type="text"
+          id="gameName"
+          name="gameName"
+          value="<%= game.game_name %>"
+          required
+        />
+
+        <label for="publisher">Publisher:</label>
+        <input
+          type="text"
+          id="publisher"
+          name="publisher"
+          value="<%= game.publisher %>"
+          required
+        />
+
+        <label for="release_year">Release Year:</label>
+        <input
+          type="number"
+          id="release_year"
+          name="release_year"
+          value="<%= game.year_of_release %>"
+          min="1900"
+          max="9999"
+          required
+        />
+
+        <label for="cost">Cost:</label>
+        <input
+          type="number"
+          step="0.01"
+          id="cost"
+          name="cost"
+          value="<%= game.cost %>"
+          min="0"
+          required
+        />
+
+        <!-- Current Genres (for removal) -->
+        <label>Current Genres: <%= game.genres || 'None' %></label><br />
+        <label>Remove Genres:</label><br />
+        <% allGenres.forEach(genre => { %> <% if (game.genres.split(`,
+        `).includes(genre.genre)) { %>
+        <label>
+          <input
+            type="checkbox"
+            name="genresToRemove"
+            value="<%= genre.id %>"
+          />
+          <%= genre.genre %>
+        </label>
+        <br />
+        <% } %> <% }); %>
+
+        <!-- Available Genres (for adding) -->
+        <label>Add Genres:</label><br />
+        <% allGenres.forEach(genre => { %> <% if (!game.genres.split(`,
+        `).includes(genre.genre)) { %>
+        <label>
+          <input type="checkbox" name="genresToAdd" value="<%= genre.id %>" />
+          <%= genre.genre %>
+        </label>
+        <br />
+        <% } %> <% }); %>
+
+        <!-- New Genre -->
+        <label for="newGenre">New Genre:</label>
+        <input
+          type="text"
+          id="newGenre"
+          name="newGenre"
+          placeholder="e.g., Open World"
+        />
+
+        <button type="submit">Update Game</button>
+      </form>
+    </section>
+    <%- include('footer') %>
+  </body>
+</html>
