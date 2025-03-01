@@ -1,4 +1,5 @@
 const db = require('../modules/queries');
+const getImageUrl = require('../getImgUrl');
 
 async function indexController(req, res) {
   const rows = await db.getGames();
@@ -13,7 +14,8 @@ async function indexController(req, res) {
 async function gamesController(req, res) {
   const rows = await db.getGames();
   const query = req.query.search;
-  console.log(query);
+  const image_url = await getImageUrl(rows.game_name);
+  // console.log(query);
 
   if (query) {
     return searchGamesController(req, res);
@@ -23,7 +25,11 @@ async function gamesController(req, res) {
       res.status(404).send({ message: 'No games found' });
     } else {
       // res.json(rows);
-      res.render('../views/games.ejs', { title: `Games`, games: rows });
+      res.render('../views/games.ejs', {
+        title: `Games`,
+        games: rows,
+        image_url: image_url,
+      });
     }
   }
 }
