@@ -3,10 +3,12 @@ const db = require('../modules/queries');
 async function getEditPage(req, res) {
   const id = req.params.id;
   const rows = await db.getGameDetail(id);
-  const allGenres = await db.getCategories(); // Fetch all genres
+  const allGenres = await db.getCategories();
   if (!rows) {
     res.status(404).send({ message: 'No game found' });
   } else {
+    console.log('Game for Edit:', rows);
+    console.log('All Genres:', allGenres);
     res.render('../views/edit.ejs', { title: `Edit`, game: rows, allGenres });
   }
 }

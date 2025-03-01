@@ -55,11 +55,16 @@
           required
         />
 
-        <!-- Current Genres (for removal) -->
-        <label>Current Genres: <%= game.genres || 'None' %></label><br />
-        <label>Remove Genres:</label><br />
-        <% allGenres.forEach(genre => { %> <% if (game.genres.split(`,
-        `).includes(genre.genre)) { %>
+        <!-- Current Genres for Removal -->
+        <label>
+          <h4>Current Genres:</h4>
+          <%= game.genres || 'None' %></label
+        ><br />
+        <label><h4>Remove Genres:</h4></label><br />
+        <% if (game.genres && game.genres.trim()) { %> <% const currentGenres =
+        game.genres.split(', ').map(g => g.trim()); %> <%
+        allGenres.forEach(genre => { %> <% if
+        (currentGenres.includes(genre.genre)) { %>
         <label>
           <input
             type="checkbox"
@@ -69,12 +74,15 @@
           <%= genre.genre %>
         </label>
         <br />
-        <% } %> <% }); %>
+        <% } %> <% }); %> <% } else { %>
+        <p>No genres to remove</p>
+        <% } %>
 
-        <!-- Available Genres (for adding) -->
-        <label>Add Genres:</label><br />
-        <% allGenres.forEach(genre => { %> <% if (!game.genres.split(`,
-        `).includes(genre.genre)) { %>
+        <!-- Add Genres -->
+        <label><h4>Add Genres:</h4></label><br />
+        <% allGenres.forEach(genre => { %> <% const currentGenres = game.genres
+        ? game.genres.split(', ').map(g => g.trim().toLowerCase()) : []; %> <%
+        if (!currentGenres.includes(genre.genre.trim().toLowerCase())) { %>
         <label>
           <input type="checkbox" name="genresToAdd" value="<%= genre.id %>" />
           <%= genre.genre %>
@@ -82,7 +90,6 @@
         <br />
         <% } %> <% }); %>
 
-        <!-- New Genre -->
         <label for="newGenre">New Genre:</label>
         <input
           type="text"
