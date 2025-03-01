@@ -12,13 +12,13 @@
 
 * {
   margin: 0;
-  padding: 0; /* Added to reset padding globally */
+  padding: 0;
 }
 
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  font-family: Arial, sans-serif; /* Consolidated from later rule */
+  font-family: Arial, sans-serif;
   background-color: #f2f2f2;
   min-height: 100vh;
   display: flex;
@@ -53,7 +53,7 @@ h6 {
 }
 
 p {
-  text-wrap: pretty; /* Consider fallback: word-wrap: break-word; */
+  text-wrap: pretty; /* Fallback: word-wrap: break-word; if needed */
 }
 
 h1,
@@ -62,11 +62,11 @@ h3,
 h4,
 h5,
 h6 {
-  text-wrap: balance; /* Consider fallback: word-wrap: break-word; */
+  text-wrap: balance; /* Fallback: word-wrap: break-word; if needed */
 }
 
 li {
-  list-style: none; /* Global reset, no need to repeat in .header nav ul */
+  list-style: none;
 }
 
 a {
@@ -79,7 +79,7 @@ a {
   isolation: isolate;
 }
 
-/* Style Start */
+/* Header Styles */
 .header {
   align-items: center;
   padding: 10px 20px;
@@ -99,7 +99,7 @@ a {
 
 .header nav ul {
   display: flex;
-  gap: 10px; /* Replaced margin-right with gap for cleaner spacing */
+  gap: 10px;
 }
 
 .header nav ul li a {
@@ -127,27 +127,24 @@ a {
   background-color: #333;
   color: #fff;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .header form button[type='submit']:hover,
 .header form button[type='submit']:focus {
-  /* Added focus for accessibility */
   background-color: #fff;
   color: #333;
 }
 
-/* Existing reset and other styles remain unchanged up to this point */
-
-/* Improved home-container and contents */
+/* Home Container */
 .home-container {
   flex-grow: 1;
   padding: 40px 20px;
-  background-color: #333;
+  background-color: #fff; /* Changed from #333 for consistency */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   border-radius: 8px;
-  max-width: 1200px; /* Increased from 900px for wider screens */
-  width: 90%; /* Allows it to scale fluidly up to the max-width */
+  max-width: 1200px;
+  width: 90%;
   margin: 20px auto;
 }
 
@@ -155,15 +152,13 @@ a {
   font-size: 2rem;
   color: #333;
   margin-bottom: 30px;
+  text-align: center; /* Added for consistency */
 }
 
 .home-link-container {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(300px, 1fr)
-  ); /* Kept at 300px min */
-  gap: 25px; /* Slightly increased for better spacing */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
   padding: 0;
 }
 
@@ -172,10 +167,11 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f8f8f8;
+  background-color: bisque; /* Changed from #f8f8f8 for hover contrast */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border-radius: 6px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.2s ease;
   font-size: 1.25rem;
   font-weight: 500;
   color: #333;
@@ -185,24 +181,19 @@ a {
 .home-link-card:focus {
   transform: translateY(-5px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-  background-color: #f8f8f8;
+  background-color: #f8f8f8; /* Moved here for noticeable hover */
 }
 
-.home-link-container a {
-  text-decoration: none;
-  color: inherit;
-}
-
-/* Responsive adjustments */
+/* Responsive Home */
 @media (max-width: 700px) {
   .home-container {
     padding: 20px 15px;
     margin: 10px auto;
-    width: 95%; /* Slightly wider on small screens */
+    width: 95%;
   }
 
   .home-link-container {
-    grid-template-columns: 1fr; /* Single column on smaller screens */
+    grid-template-columns: 1fr;
     gap: 15px;
   }
 
@@ -212,54 +203,264 @@ a {
   }
 }
 
-/* Ensure it scales nicely on very large screens */
 @media (min-width: 1400px) {
   .home-container {
-    max-width: 1300px; /* Optional: allows even more width on ultra-wide screens */
+    max-width: 1300px;
   }
 }
 
-/* Rest of your CSS (e.g., .container, table, footer) remains unchanged */
-
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+/* Games Container */
+.games-container {
+  max-width: 1200px;
+  width: 90%;
+  margin: 20px auto;
+  padding: 40px 20px;
   background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
 }
 
-h1 {
+.games-container h1 {
   text-align: center;
-  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 30px;
 }
 
-table {
+.games-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.game-card {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.game-card:hover,
+.game-card:focus {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.game-card img {
   width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border-radius: 4px;
 }
 
-th,
-td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+.game-card h2 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #333;
 }
 
-th {
-  background-color: #333;
-  color: #fff;
+.game-card p {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  color: #666;
 }
 
-tr:nth-child(even) {
-  background-color: #f2f2f2;
+.game-card p:last-child {
+  margin-bottom: 0;
 }
 
-tr:hover {
-  background-color: #ddd;
+/* Responsive Games */
+@media (max-width: 700px) {
+  .games-container {
+    padding: 20px 15px;
+    width: 95%;
+    margin: 10px auto;
+  }
+
+  .games-list {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .game-card img {
+    height: 180px;
+  }
 }
 
+/* Categories Container */
+.categories-container {
+  max-width: 1200px;
+  width: 90%;
+  margin: 20px auto;
+  padding: 40px 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+.categories-container h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.categories-container h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.categories-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.category-card {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.category-card:hover,
+.category-card:focus {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.category-card h2 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.category-card p {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+.category-card p:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive Categories */
+@media (max-width: 700px) {
+  .categories-container {
+    padding: 20px 15px;
+    width: 95%;
+    margin: 10px auto;
+  }
+
+  .categories-list {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+/* Game Detail Container */
+.game-detail-container {
+  max-width: 1200px;
+  width: 90%;
+  margin: 20px auto;
+  padding: 40px 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+.game-detail-container h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.game-detail-card-container {
+  display: grid; /* Changed from flex to grid for consistency */
+  grid-template-columns: minmax(300px, 600px); /* Single centered card */
+  justify-content: center;
+  gap: 20px; /* Consistent with other layouts */
+  margin-top: 20px;
+}
+
+.game-detail-card {
+  padding: 20px; /* Increased for a larger card */
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+}
+
+.game-detail-card:hover,
+.game-detail-card:focus {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.game-detail-card img {
+  width: 100%;
+  height: 300px; /* Larger fixed height for detail view */
+  object-fit: cover; /* Consistent image cropping */
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+
+.game-detail-card h2 {
+  font-size: 1.5rem; /* Larger for detail view */
+  font-weight: 500;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.game-detail-card p {
+  font-size: 1rem; /* Slightly larger for detail view */
+  margin-bottom: 15px;
+  color: #666;
+}
+
+.game-detail-card p:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive Game Detail */
+@media (max-width: 700px) {
+  .game-detail-container {
+    padding: 20px 15px;
+    width: 95%;
+    margin: 10px auto;
+  }
+
+  .game-detail-card-container {
+    grid-template-columns: 1fr;
+  }
+
+  .game-detail-card img {
+    height: 250px; /* Adjusted for smaller screens */
+  }
+
+  .game-detail-card h2 {
+    font-size: 1.25rem;
+  }
+
+  .game-detail-card p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Footer and Other Shared Styles */
 footer {
   text-align: center;
   padding: 10px;
@@ -278,164 +479,4 @@ form {
 label {
   display: block;
   margin-bottom: 5px;
-}
-/* games */
-
-.games-container {
-  max-width: 1200px; /* Matches home-container for consistency */
-  width: 90%; /* Fluid width up to max-width */
-  margin: 20px auto; /* Consistent with home-container */
-  padding: 40px 20px; /* Increased padding for breathing room */
-  background-color: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Matches home-container */
-  border-radius: 8px; /* Added for consistency */
-}
-
-.games-container h1 {
-  text-align: center;
-  font-size: 2rem; /* Larger for prominence */
-  color: #333; /* Consistent with home-container */
-  margin-bottom: 30px; /* More space before cards */
-}
-
-.games-list {
-  display: grid; /* Switched from flex to grid for better control */
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive */
-  gap: 20px; /* Consistent spacing */
-}
-
-.game-card {
-  padding: 15px; /* Slightly more padding */
-  border: 1px solid #ddd;
-  border-radius: 6px; /* Slightly larger radius */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Matches home-link-card */
-  background-color: #fff;
-  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Hover effect */
-}
-
-.game-card:hover,
-.game-card:focus {
-  /* Added focus for accessibility */
-  transform: translateY(-5px); /* Lift effect */
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
-}
-
-.game-card img {
-  width: 100%;
-  height: 200px; /* Fixed height for consistency */
-  object-fit: cover; /* Ensures images crop nicely */
-  margin-bottom: 15px; /* More spacing */
-  border-radius: 4px; /* Subtle rounding */
-}
-
-.game-card h2 {
-  font-size: 1.25rem; /* Matches home-link-card */
-  font-weight: 500; /* Medium weight */
-  margin-bottom: 10px; /* More spacing */
-  color: #333;
-}
-
-.game-card p {
-  font-size: 0.9rem; /* Slightly larger for readability */
-  margin-bottom: 10px; /* Consistent spacing */
-  color: #666; /* Softer color for secondary text */
-}
-
-.game-card p:last-child {
-  margin-bottom: 0; /* Retained to avoid extra space */
-}
-
-/* Responsive adjustments */
-@media (max-width: 700px) {
-  .games-container {
-    padding: 20px 15px;
-    width: 95%; /* Wider on small screens */
-    margin: 10px auto;
-  }
-
-  .games-list {
-    grid-template-columns: 1fr; /* Single column on small screens */
-    gap: 15px;
-  }
-
-  .game-card img {
-    height: 180px; /* Slightly smaller on mobile */
-  }
-}
-
-/* categories */
-
-.categories-container {
-  max-width: 1200px; /* Matches home-container for consistency */
-  width: 90%; /* Fluid width up to max-width */
-  margin: 20px auto; /* Consistent with home-container */
-  padding: 40px 20px; /* Increased padding for breathing room */
-  background-color: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Matches home-container */
-  border-radius: 8px; /* Added for consistency */
-}
-
-.categories-container h1 {
-  text-align: center;
-  font-size: 2rem; /* Larger for prominence */
-  color: #333; /* Consistent with home-container */
-  margin-bottom: 30px; /* More space before cards */
-}
-.categories-container h2 {
-  text-align: center;
-  font-size: 1.5rem; /* Larger for prominence */
-  color: #333; /* Consistent with home-container */
-  margin-bottom: 30px; /* More space before cards */
-}
-
-.categories-list {
-  display: grid; /* Switched from flex to grid for better control */
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive */
-  gap: 20px; /* Consistent spacing */
-}
-
-.category-card {
-  padding: 15px; /* Slightly more padding */
-  border: 1px solid #ddd;
-  border-radius: 6px; /* Slightly larger radius */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Matches home-link-card */
-  background-color: #fff;
-  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Hover effect */
-}
-
-.category-card:hover,
-.category-card:focus {
-  /* Added focus for accessibility */
-  transform: translateY(-5px); /* Lift effect */
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
-}
-
-.category-card h2 {
-  font-size: 1.25rem; /* Matches home-link-card */
-  font-weight: 500; /* Medium weight */
-  margin-bottom: 10px; /* More spacing */
-  color: #333;
-}
-.category-card p {
-  font-size: 0.9rem; /* Slightly larger for readability */
-  margin-bottom: 10px; /* Consistent spacing */
-  color: #666; /* Softer color for secondary text */
-}
-
-.category-card p:last-child {
-  margin-bottom: 0; /* Retained to avoid extra space */
-}
-
-/* Responsive adjustments */
-@media (max-width: 700px) {
-  .categories-container {
-    padding: 20px 15px;
-    width: 95%; /* Wider on small screens */
-    margin: 10px auto;
-  }
-
-  .categories-list {
-    grid-template-columns: 1fr; /* Single column on small screens */
-    gap: 15px;
-  }
 }

@@ -54,9 +54,21 @@ async function getCategoryController(req, res) {
     });
   }
 }
+
+getGameDetailController = async (req, res) => {
+  const id = req.params.id;
+  const rows = await db.getGameDetail(id);
+  if (!rows) {
+    res.status(404).send({ message: 'No game found' });
+  } else {
+    // res.json(rows);
+    res.render('../views/gameDetail.ejs', { title: `Detail`, game: rows });
+  }
+};
 module.exports = {
   indexController,
   gamesController,
   categoriesController,
   getCategoryController,
+  getGameDetailController,
 };

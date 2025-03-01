@@ -12,13 +12,15 @@
       <h1><%= title %></h1>
       <div class="games-list">
         <% games.forEach(function(game) { %>
-        <div class="game-card">
-          <img src="<%= game.image_url %>" alt="<%= game.game_name %>" />
-          <h2><%= game.game_name %></h2>
-          <p>Publisher: <%= game.publisher %></p>
-          <p>Cost: $<%= game.cost %></p>
-          <p>Year of Release: <%= game.year_of_release %></p>
-        </div>
+        <a href="/games/<%= game.id %>">
+          <div class="game-card">
+            <img src="<%= game.image_url %>" alt="<%= game.game_name %>" />
+            <h2><%= game.game_name %></h2>
+            <p>Publisher: <%= game.publisher %></p>
+            <p>Cost: $<%= game.cost %></p>
+            <p>Year of Release: <%= game.year_of_release %></p>
+          </div>
+        </a>
         <% }); %>
       </div>
     </section>

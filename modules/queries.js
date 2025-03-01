@@ -21,8 +21,17 @@ const getGamesByCategory = async (genre) => {
 
   return rows;
 };
+
+const getGameDetail = async (id) => {
+  const { rows } = await pool.query(
+    'SELECT * FROM game JOIN game_genre ON game.id = game_genre.game_id JOIN genre ON game_genre.genre_id = genre.id  WHERE game.id = $1',
+    [id]
+  );
+  return rows;
+};
 module.exports = {
   getGames,
   getCategories,
   getGamesByCategory,
+  getGameDetail,
 };

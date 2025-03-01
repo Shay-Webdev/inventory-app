@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <%- include('header') %>
+    <section class="game-detail-container">
+      <div class="game-detail-card-container">
+        <div class="game-detail-card game-card">
+          <img src="<%= game.image_url %>" alt="<%= game.game_name %>" />
+          <h2><%= game.game_name %></h2>
+          <p>Publisher: <%= game.publisher %></p>
+          <p>Release Date: <%= game.release_date %></p>
+          <p>Cost: $<%= game.cost %></p>
+          <p>Genre: <%= game.genre %></p>
+        </div>
+      </div>
+    </section>
+    <%- include('footer') %>
+  </body>
+</html>

@@ -6,5 +6,6 @@ indexRouter.get('/', controller.indexController);
 indexRouter.get('/games', controller.gamesController);
 indexRouter.get('/categories', controller.categoriesController);
 indexRouter.get('/categories', controller.getCategoryController);
+indexRouter.get('/games/:id', controller.getGameDetailController);
 
 module.exports = indexRouter;
