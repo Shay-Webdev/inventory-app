@@ -12,11 +12,19 @@ async function indexController(req, res) {
 
 async function gamesController(req, res) {
   const rows = await db.getGames();
-  if (!rows) {
-    res.status(404).send({ message: 'No games found' });
-  } else {
-    // res.json(rows);
-    res.render('../views/games.ejs', { title: `Games`, games: rows });
+  const query = req.query.search;
+  console.log(query);
+
+  if (query) {
+    return searchGamesController(req, res);
+  }
+  {
+    if (!rows) {
+      res.status(404).send({ message: 'No games found' });
+    } else {
+      // res.json(rows);
+      res.render('../views/games.ejs', { title: `Games`, games: rows });
+    }
   }
 }
 
@@ -55,7 +63,7 @@ async function getCategoryController(req, res) {
   }
 }
 
-getGameDetailController = async (req, res) => {
+const getGameDetailController = async (req, res) => {
   const id = req.params.id;
   const rows = await db.getGameDetail(id);
   if (!rows) {
@@ -65,10 +73,30 @@ getGameDetailController = async (req, res) => {
     res.render('../views/gameDetail.ejs', { title: `Detail`, game: rows });
   }
 };
+
+async function searchGamesController(req, res) {
+  const query = req.query.search;
+  console.log(query);
+
+  const rows = await db.searchGames(query);
+  if (!rows || rows.length === 0) {
+    res.status(404).render('../views/error.ejs', {
+      title: 'Error',
+      message: 'No games found',
+    });
+  } else {
+    // res.json(rows);
+    res.render('../views/games.ejs', {
+      title: `Search Results for ${query}`,
+      games: rows,
+    });
+  }
+}
 module.exports = {
   indexController,
   gamesController,
   categoriesController,
   getCategoryController,
   getGameDetailController,
+  searchGamesController,
 };

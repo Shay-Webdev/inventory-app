@@ -27,13 +27,22 @@ const getGameDetail = async (id) => {
     `SELECT  g.id, g.game_name, g.publisher, g.cost, g.year_of_release, STRING_AGG(gen.genre, ', ') AS genres FROM game g JOIN game_genre gg ON g.id = gg.game_id JOIN genre gen ON gg.genre_id = gen.id WHERE g.id = $1 GROUP BY g.id, g.game_name, g.publisher, g.cost, g.year_of_release;`,
     [id]
   );
-  console.log(`Game Detail: `, rows[0]);
+  // console.log(`Game Detail: `, rows[0]);
 
   return rows[0];
+};
+
+const searchGames = async (searchTerm) => {
+  const { rows } = await pool.query(
+    'SELECT * FROM game WHERE game_name ILIKE $1',
+    [`%${searchTerm}%`]
+  );
+  return rows;
 };
 module.exports = {
   getGames,
   getCategories,
   getGamesByCategory,
   getGameDetail,
+  searchGames,
 };
