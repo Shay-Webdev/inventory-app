@@ -92,6 +92,7 @@ async function searchGamesController(req, res) {
     });
   }
 }
+
 module.exports = {
   indexController,
   gamesController,

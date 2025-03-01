@@ -99,6 +99,88 @@ async function addNewGenre(genreName) {
   return result.rows[0]?.id; // Returns new genre ID or undefined if exists
 }
 
+async function addNewGame(gameName, cost, release_year, publisher, genreIds) {
+  const query = `
+    INSERT INTO game (game_name, cost, year_of_release, publisher)
+    VALUES ($1, $2, $3, $4)
+    RETURNING id;
+  `;
+  const result = await pool.query(query, [
+    gameName,
+    cost,
+    release_year,
+    publisher,
+  ]);
+  const gameId = result.rows[0]?.id; // Returns new game ID or undefined if exists
+  if (gameId) {
+    const insertQuery = `
+      INSERT INTO game_genre (game_id, genre_id)
+      SELECT $1, unnest($2::int[])
+    `;
+    await pool.query(insertQuery, [gameId, genreIds]);
+  }
+  return gameId;
+}
+
+// In queries.js
+async function addGameAndGenres(
+  gameName,
+  publisher,
+  cost,
+  yearOfRelease,
+  genreIdsToAdd
+) {
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+
+    // Insert game
+    const gameQuery = `
+      INSERT INTO game (game_name, publisher, cost, year_of_release)
+      VALUES ($1, $2, $3, $4)
+      RETURNING *;
+    `;
+    const gameResult = await client.query(gameQuery, [
+      gameName,
+      publisher,
+      cost,
+      yearOfRelease,
+    ]);
+    const gameId = gameResult.rows[0].id;
+
+    // Add genres if provided
+    if (genreIdsToAdd && genreIdsToAdd.length > 0) {
+      const addGenresQuery = `
+        INSERT INTO game_genre (game_id, genre_id)
+        SELECT $1, unnest($2::int[])
+        ON CONFLICT DO NOTHING;
+      `;
+      await client.query(addGenresQuery, [gameId, genreIdsToAdd]);
+    }
+
+    // Fetch full game details with genres
+    const detailQuery = `
+      SELECT g.id, g.game_name, g.publisher, g.cost, g.year_of_release, 
+             STRING_AGG(gen.genre, ', ') AS genres 
+      FROM game g 
+      LEFT JOIN game_genre gg ON g.id = gg.game_id 
+      LEFT JOIN genre gen ON gg.genre_id = gen.id 
+      WHERE g.id = $1 
+      GROUP BY g.id, g.game_name, g.publisher, g.cost, g.year_of_release;
+    `;
+    const detailResult = await client.query(detailQuery, [gameId]);
+
+    await client.query('COMMIT');
+    return detailResult.rows[0];
+  } catch (err) {
+    await client.query('ROLLBACK');
+    throw err;
+  } finally {
+    client.release();
+  }
+}
+
+// Ensure this is exported
 module.exports = {
   getGames,
   getCategories,
@@ -107,4 +189,5 @@ module.exports = {
   searchGames,
   updateGameAndGenres,
   addNewGenre,
+  addGameAndGenres, // Add this to exports
 };

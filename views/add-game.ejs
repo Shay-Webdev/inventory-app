@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <%- include('header') %>
+    <section class="game-add-container form-container">
+      <h1><%= title %></h1>
+      <form action="/games/add" method="POST" class="game-add-form form">
+        <label for="gameName">Game Name:</label>
+        <input type="text" id="gameName" name="gameName" required />
+
+        <label for="publisher">Publisher:</label>
+        <input type="text" id="publisher" name="publisher" required />
+
+        <label for="release_year">Release Year:</label>
+        <input
+          type="number"
+          id="release_year"
+          name="release_year"
+          min="1900"
+          max="9999"
+          required
+        />
+
+        <label for="cost">Cost:</label>
+        <input
+          type="number"
+          step="0.01"
+          id="cost"
+          name="cost"
+          min="0"
+          required
+        />
+
+        <!-- Add Genres -->
+        <label><h4>Add Genres:</h4></label><br />
+        <% allGenres.forEach(genre => { %>
+        <label>
+          <input type="checkbox" name="genresToAdd" value="<%= genre.id %>" />
+          <%= genre.genre %> </label
+        ><br />
+        <% }); %>
+
+        <label for="newGenre">New Genre:</label>
+        <input
+          type="text"
+          id="newGenre"
+          name="newGenre"
+          placeholder="e.g., Open World"
+        />
+
+        <button type="submit">Add Game</button>
+      </form>
+    </section>
+    <%- include('footer') %>
+  </body>
+</html>

@@ -8,12 +8,12 @@
   </head>
   <body>
     <%- include('header') %>
-    <section class="game-edit-container">
+    <section class="game-edit-container form-container">
       <h1><%= title %></h1>
       <form
         action="/games/<%= game.id %>/update"
         method="POST"
-        class="game-edit-form"
+        class="game-edit-form form"
       >
         <label for="gameName">Game Name:</label>
         <input

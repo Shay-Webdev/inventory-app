@@ -10,6 +10,7 @@
     <%- include('header') %>
     <section class="games-container main-container">
       <h1><%= title %></h1>
+      <a href="/games"><button class="add-game-btn">Add Game</button></a>
       <div class="games-list">
         <% games.forEach(function(game) { %>
         <a href="/games/<%= game.id %>">

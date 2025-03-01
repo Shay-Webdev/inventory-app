@@ -86,7 +86,73 @@ async function updateGameAndGenresController(req, res) {
     res.status(500).send('Server Error');
   }
 }
+
+async function addGameController(req, res) {
+  const { gameName, publisher, release_year, cost, genresToAdd, newGenre } =
+    req.body;
+  console.log('Request body:', req.body);
+
+  if (!gameName || typeof gameName !== 'string' || gameName.trim() === '') {
+    return res.status(400).send('Invalid game name');
+  }
+  if (!publisher || typeof publisher !== 'string' || publisher.trim() === '') {
+    return res.status(400).send('Invalid publisher');
+  }
+  const parsedYear = parseInt(release_year, 10);
+  if (isNaN(parsedYear) || parsedYear < 1900 || parsedYear > 9999) {
+    return res.status(400).send('Invalid release year');
+  }
+  const parsedCost = parseFloat(cost);
+  if (isNaN(parsedCost) || parsedCost < 0) {
+    return res.status(400).send('Invalid cost');
+  }
+
+  try {
+    const genreIdsToAdd = genresToAdd
+      ? Array.isArray(genresToAdd)
+        ? genresToAdd.map(Number)
+        : [Number(genresToAdd)]
+      : [];
+    console.log('Genres to Add:', genreIdsToAdd);
+
+    if (newGenre && newGenre.trim()) {
+      const newGenreId = await db.addNewGenre(newGenre.trim());
+      console.log('New Genre ID:', newGenreId);
+      if (newGenreId) genreIdsToAdd.push(newGenreId);
+    }
+
+    const newGame = await db.addGameAndGenres(
+      gameName.trim(),
+      publisher.trim(),
+      parsedCost,
+      parsedYear,
+      genreIdsToAdd
+    );
+
+    if (!newGame) {
+      return res.status(500).send('Failed to add game');
+    }
+
+    res.redirect(`/games/${newGame.id}`);
+  } catch (err) {
+    console.error('Add game error:', err);
+    res.status(500).send('Server Error');
+  }
+}
+
+async function getAddGameController(req, res) {
+  try {
+    const allGenres = await db.getCategories(); // Fetch all genres
+    console.log('All Genres for Add Page:', allGenres); // Debug
+    res.render('add-game', { title: 'Add Game', allGenres }); // Pass allGenres
+  } catch (err) {
+    console.error('Error fetching genres:', err);
+    res.status(500).send('Server Error');
+  }
+}
 module.exports = {
   getEditPage,
   updateGameAndGenresController,
+  addGameController,
+  getAddGameController,
 };
