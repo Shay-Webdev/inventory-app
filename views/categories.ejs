@@ -12,9 +12,11 @@
       <h1><%= title %></h1>
       <div class="categories">
         <% categories.forEach(category => { %>
-        <div class="category-card">
-          <h2><%= category.genre %></h2>
-        </div>
+        <a href="/categories/?genre=<%= category.genre %>">
+          <div class="category-card">
+            <h2><%= category.genre %></h2>
+          </div>
+        </a>
         <% }); %>
       </div>
     </section>

@@ -22,19 +22,41 @@ async function gamesController(req, res) {
 
 async function categoriesController(req, res) {
   const rows = await db.getCategories();
+  const genre = req.query.genre;
+  console.log(genre);
+
+  if (genre) {
+    return getCategoryController(req, res);
+  } else {
+    if (!rows) {
+      res.status(404).send({ message: 'No games found' });
+    } else {
+      // res.json(rows);
+      res.render('../views/categories.ejs', {
+        title: `Categories`,
+        categories: rows,
+      });
+    }
+  }
+}
+
+async function getCategoryController(req, res) {
+  const id = req.params.id;
+  const genre = req.query.genre;
+  const rows = await db.getGamesByCategory(genre);
   if (!rows) {
     res.status(404).send({ message: 'No games found' });
   } else {
     // res.json(rows);
-    res.render('../views/categories.ejs', {
-      title: `Categories`,
-      categories: rows,
+    res.render('../views/games.ejs', {
+      title: genre,
+      games: rows,
     });
   }
 }
-
 module.exports = {
   indexController,
   gamesController,
   categoriesController,
+  getCategoryController,
 };
